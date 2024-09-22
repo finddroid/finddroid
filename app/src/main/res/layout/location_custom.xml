@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="320dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#030E1F">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/White"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp"
+            android:text="Reset Password"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/custom_alert_box_set_btn"
+                android:text="set"
+                android:textColor="@color/White"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/button_pass_desine"
+                android:textSize="20dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/White"
+                android:id="@+id/custom_alert_box_cancel_btn"
+                android:background="@drawable/button_pass_desine"
+                android:textSize="20dp"
+                android:text="cancel"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

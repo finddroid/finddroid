@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color of the dialog -->
+    <solid android:color="#FFFFFF" /> <!-- You can change the color here -->
+
+    <!-- Corner radius to make the edges curved -->
+    <corners android:radius="20dp" /> <!-- Adjust the radius for more/less curve -->
+
+    <!-- Optional: Border (stroke) for the dialog -->
+    <stroke android:width="2dp" android:color="#cccccc" /> <!-- Optional border color and thickness -->
+
+    <!-- Optional: Padding inside the dialog -->
+    <padding
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"
+        android:bottom="10dp" />
+</shape>
