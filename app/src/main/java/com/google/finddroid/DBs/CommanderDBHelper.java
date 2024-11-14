@@ -141,6 +141,4 @@ public class CommanderDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-
-
 }

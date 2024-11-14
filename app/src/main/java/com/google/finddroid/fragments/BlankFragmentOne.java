@@ -50,8 +50,8 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Use getContext() factory method to create a new instance of
+     * getContext() fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
@@ -79,7 +79,7 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for getContext() fragment
         return inflater.inflate(R.layout.fragment_blank_one, container, false);
     }
 
@@ -133,24 +133,14 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
         rv.setAdapter(rva);
     }
 
-
+    //Don't play with bottom code because i don't know how it's work but it's work :)
     @Override
-    public void LocationClicked(boolean b) {
-        checkLocationPermission();
+    public void LocationClicked() {
+        checkPermission();
     }
 
-    private void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // Fine Location permission is granted
-            // Check if current android version >= 11, if >= 11 check for Background Location permission
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    // Background Location Permission is granted so do your work here
-                } else {
-                    // Ask for Background Location Permission
-                    askPermissionForBackgroundUsage();
-                }
-            }
+    private void checkPermission() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
         } else {
             // Fine Location Permission is not granted so ask for permission
             askForLocationPermission();
@@ -159,8 +149,8 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
 
     private void askForLocationPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
-            new AlertDialog.Builder(getContext(),R.style.MyDialogTheme)
-                    .setTitle("Permission Needed!")
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Permission Needed ")
                     .setMessage("Location Permission Needed!")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -172,7 +162,6 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
                     .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                             // Permission is denied by the user
                         }
                     })
@@ -183,56 +172,6 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
         }
     }
 
-    private void askPermissionForBackgroundUsage() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-            new AlertDialog.Builder(getContext(),R.style.MyDialogTheme)
-                    .setTitle("Permission Needed!")
-                    .setMessage("tap \"Allow all time in the next screen\"")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_PERMISSION_CODE);
-                        }
-                    })
-                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // User declined for Background Location Permission.
-                        }
-                    })
-                    .create().show();
-        } else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_PERMISSION_CODE);
-        }
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_PERMISSION_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // User granted location permission
-                // Now check if android version >= 11, if >= 11 check for Background Location Permission
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        // Background Location Permission is granted so do your work here
-                    } else {
-                        // Ask for Background Location Permission
-                        askPermissionForBackgroundUsage();
-                    }
-                }
-            } else {
-                // User denied location permission
-            }
-        } else if (requestCode == BACKGROUND_LOCATION_PERMISSION_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // User granted for Background Location Permission.
-            } else {
-                // User declined for Background Location Permission.
-            }
-        }
 
-    }
 }

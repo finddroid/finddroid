@@ -7,7 +7,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -17,20 +16,30 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.airbnb.lottie.LottieAnimationView;
-import com.amrdeveloper.lottiedialog.LottieDialog;
 import com.google.finddroid.DBs.CommanderDBHelper;
 import com.google.finddroid.DBs.SwitchDBHelper;
 import com.google.finddroid.MainActivity;
 import com.google.finddroid.MyAccessibilityService;
-import com.google.finddroid.MyDeviceAdminReceiver;
 import com.google.finddroid.NotificationListener;
 import com.google.finddroid.R;
 import com.google.finddroid.global.SwitchDBGlobalVar;
 
 public class RecyclerSwitchClickAction {
+    /***
+     * switch 0 for Notification permission
+     * switch 1 for Accessibility permission
+     * switch 2 for Admin permission
+     * switch 3 for set password
+     * switch 4 for Location permission
+     * switch 5 for Lockdevice permission (Admin needed)
+     * switch 6 for Ring change permission (Admin needed)
+     * switch 7 for Controll with sms permission (Contect permission needed)
+     * switch 8 and 9 for control with whatsapp and telegram permission (Accessablity needed)
+     * switch 10 and 11 for anti switch off and anti mode change permission (Accessablity needed)
+     * ***/
+
+
     Context mContext;
     int mPostion;
     CheckAndRequestLocationPermission checkAndRequestLocationPermission;
@@ -45,64 +54,106 @@ public class RecyclerSwitchClickAction {
         this.checkAndRequestLocationPermission = checkAndRequestLocationPermission;
         this.GlobelView=view;
     }
+
+    //execute and check the state of switch to perform action
     public void executeAction(){
+        //if user enable switch then it run true function
         if(SwitchState){
             executeStateTrue(mPostion);
         }else {
+            //if user disable switch then it run false function
             executeStateFalse(mPostion);
         }
     }
+
+    //THIS IS RUN WHEN USER ENABLE SWITCH
     public void executeStateTrue(int postion) {
-        if(mPostion==0){
+        if(mPostion==0){ //NOTIFICATION PERMISSION SWITCH
+            //Check notification permission is granted or not
             ComponentName cn = new ComponentName(mContext, NotificationListener.class);
             String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_notification_listeners");
             final boolean enabled = flat != null && flat.contains(cn.flattenToString());
+            //If permission not granted it show the lottie anim and ask user to enable it
             if (!enabled){
                 ShowNotificationPermissionBox();
             }
         }
-        else if(mPostion==1){
+        else if(mPostion==1){//ACCESSibility PERMISSION SWITCH
+            //Check accessibility permission granted or not
             ComponentName cn = new ComponentName(mContext, MyAccessibilityService.class);
             String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_accessibility_services");
             final boolean enabled = flat != null && flat.contains(cn.flattenToString());
+            //If permission not granted it show the lottie anim and ask user to enable it
             if(!enabled) {
-//                AccessibilityPermissionOpener();
                 ShowAssesablityPermissionDialogBox();
             }
         }
-        else if(mPostion==2){
+        else if(mPostion==2){//ADMIN SWITCH
+            //This function check and send user to Admin permission
             ShowAdminPermissionDialogBox();
         }
-        else if(mPostion==3){
-            passwordListItemRunner();
+        else if(mPostion==3){//SET PASSWORD SWITCH
+            passwordListItemRunner();//it show user box to insert password
         }
         else if(mPostion==4){
             /*this method implepantable and implement in fragment one
             * because we can't request directly for background location permission so we use this
             * */
-            checkAndRequestLocationPermission.LocationClicked(true);
+            checkAndRequestLocationPermission.LocationClicked();
         }
-        else if (mPostion==5) {
-            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-            mContext.startActivity(intent);
-        }else if(mPostion==6){
-            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-            ComponentName componentName = new ComponentName(mContext,MyDeviceAdminReceiver.class);
-            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
-            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "You need to enable the app as a device administrator to turn off the screen.");
-            mContext.startActivity(intent);
-        }else if(mPostion==7){
+        else if (mPostion==5) {//LOCK DEVICE SWITCH
+            ShowAdminPermissionDialogBox();
+        }else if(mPostion==6){//RING MODE SWITCH
+            ShowAdminPermissionDialogBox();
+        }else if(mPostion==7){//CONTECT PERMISSION SWITCH
             String[] permissions = {Manifest.permission.READ_CONTACTS, Manifest.permission.SEND_SMS};
             MainActivity.main.requestPermissions(permissions,3000);
+        }
+        else if(mPostion==8){//CONTROL WITH WHATSAPP PERMISSION
+            //Check for notification permission
+            ComponentName cn = new ComponentName(mContext, MyAccessibilityService.class);
+            String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_accessibility_services");
+            final boolean enabled = flat != null && flat.contains(cn.flattenToString());
+            //If permission not granted it show the lottie anim and ask user to enable it
+            if(!enabled) {
+                ShowAssesablityPermissionDialogBox();
+            }
+        }
+        else if (mPostion==9) {//CONTROL WITH TELEGRAM PERMISSION
+            //Check for notification permission
+            ComponentName cn = new ComponentName(mContext, MyAccessibilityService.class);
+            String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_accessibility_services");
+            final boolean enabled = flat != null && flat.contains(cn.flattenToString());
+            //If permission not granted it show the lottie anim and ask user to enable it
+            if(!enabled) {
+                ShowAssesablityPermissionDialogBox();
+            }
+        }
+        else if(mPostion==10){//ANTI SWITCH OFF PERMISSION
+            //Check for notification permission
+            ComponentName cn = new ComponentName(mContext, MyAccessibilityService.class);
+            String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_accessibility_services");
+            final boolean enabled = flat != null && flat.contains(cn.flattenToString());
+            //If permission not granted it show the lottie anim and ask user to enable it
+            if(!enabled) {
+                ShowAssesablityPermissionDialogBox();
+            }
+        }
+        else if(mPostion==11){//ANTI MODE CHANGE PERMISSION
+            //Check for notification permission
+            ComponentName cn = new ComponentName(mContext, MyAccessibilityService.class);
+            String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_accessibility_services");
+            final boolean enabled = flat != null && flat.contains(cn.flattenToString());
+            //If permission not granted it show the lottie anim and ask user to enable it
+            if(!enabled) {
+                ShowAssesablityPermissionDialogBox();
+            }
         }
     }
 
     public void executeStateFalse(int position){
         CommanderDBHelper commanderDBHelper = new CommanderDBHelper(mContext);
-        if (position == 0){
-
-        }
-        else if(position==3){
+        if(position==3){
 //            Log.i("excuteState False",Boolean.toString(SwitchState));
 //            Log.i("Visiblity",Integer.toString(mholder.passwordPerent.getVisibility()));
             if (mholder.passwordPerent.getVisibility() == View.VISIBLE && commanderDBHelper.isEmptyCommanderPassword()){

@@ -12,6 +12,8 @@ import androidx.annotation.RequiresApi;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+
+/* NOT USED YET MAYBE IN FUTURE */
 @RequiresApi(api = Build.VERSION_CODES.P)
 public class BiometricPromptRunner extends BiometricPrompt.AuthenticationCallback {
 //    BiometricPrompt biometricPrompt;

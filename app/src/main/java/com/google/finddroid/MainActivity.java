@@ -51,9 +51,8 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     int BACKGROUND_LOCATION_PERMISSION_CODE = 1000;
     int LOCATION_PERMISSION_CODE = 2000;
-    TextView tv;
+    //main permission define to access static function from other classes
     public static Activity main;
-    int PERMISSION_ID = 2000;
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +80,12 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tl = findViewById(R.id.main_tab_layout);
         /* calling notification service to start listen notifications*/
         new NotificationListener();
-//        requestPermissions();
-//        checkPermission();
 
         /* FragmentSetAdapter is viewpager */
         ViewPagerAdapter fsa = new ViewPagerAdapter(getSupportFragmentManager());
         vp.setAdapter(fsa);
         tl.setupWithViewPager(vp);
+        /* Check for update */
         RequestQueue volleyQueue = Volley.newRequestQueue(MainActivity.this);
         // url of the api through which we get random dog images
         String url = "https://finddroid.github.io/version.json";
@@ -121,10 +119,9 @@ public class MainActivity extends AppCompatActivity {
         // add the json request object created above
         // to the Volley request queue
         volleyQueue.add(jsonObjectRequest);
-//        checkPermission();
 
     }
-
+    /* update box for rquest user to update app */
     public void ShowUpdateBox(){
         Dialog dialog = new Dialog(MainActivity.this);
         View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.update_alert_box,null,false);
@@ -158,61 +155,13 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.show();
     }
-//    private void requestPermissions() {
-//        ActivityCompat.requestPermissions(this, new String[]{
-//                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.ACCESS_FINE_LOCATION}, 2000);
-//    }
 
-
-    private void checkPermission() {
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // Fine Location permission is granted
-            // Check if current android version >= 11, if >= 11 check for Background Location permission
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    // Background Location Permission is granted so do your work here
-                } else {
-                    // Ask for Background Location Permission
-                    askPermissionForBackgroundUsage();
-                }
-            }
-        } else {
-            // Fine Location Permission is not granted so ask for permission
-            askForLocationPermission();
-        }
-    }
-
-    private void askForLocationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Permission Needed!")
-                    .setMessage("Location Permission Needed!")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(MainActivity.this,
-                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
-                        }
-                    })
-                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Permission is denied by the user
-                        }
-                    })
-                    .create().show();
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
-        }
-    }
-
+    /*don't play with bottom code it's part of BlankFragment location permission code i don't know how it's work but it's work :) */
     private void askPermissionForBackgroundUsage() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
             new AlertDialog.Builder(this)
-                    .setTitle("Permission Needed!")
-                    .setMessage("Background Location Permission Needed!, tap \"Allow all time in the next screen\"")
+                    .setTitle("Permission Needed")
+                    .setMessage("Background Location Permission Needed, tap \"Allow all time in the next screen\"")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
