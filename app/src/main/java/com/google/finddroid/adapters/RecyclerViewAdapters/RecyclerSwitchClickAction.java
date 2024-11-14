@@ -21,6 +21,7 @@ import com.google.finddroid.DBs.CommanderDBHelper;
 import com.google.finddroid.DBs.SwitchDBHelper;
 import com.google.finddroid.MainActivity;
 import com.google.finddroid.MyAccessibilityService;
+import com.google.finddroid.MyDeviceAdminReceiver;
 import com.google.finddroid.NotificationListener;
 import com.google.finddroid.R;
 import com.google.finddroid.global.SwitchDBGlobalVar;
