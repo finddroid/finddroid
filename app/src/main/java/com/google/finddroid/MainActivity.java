@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });/// don't make code on this fucking
-
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1000);
         }
@@ -97,13 +97,23 @@ public class MainActivity extends AppCompatActivity {
                     // get the image url from the JSON object
                     String version;
                     try {
+                        PackageManager packageManager = getPackageManager();
+
+                        // Get the package info for the current app
+                        PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+
+                        // Retrieve the version name and version code
+                        String versionName = packageInfo.versionName;
+                        int versionCode = packageInfo.versionCode;
                         version = response.getString("version");
-                        Log.i("version",version);
-                        if (!version.equals("1.0.0")){
+//                        Log.i("version",versionName);
+                        if (!version.equals(versionName)){
                             ShowUpdateBox();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                    } catch (PackageManager.NameNotFoundException e) {
+//                        throw new RuntimeException(e);
                     }
                 },
 

@@ -29,9 +29,6 @@ public class SwitchDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        //if table exists and user open app first time it delete old and create new with default value
-        String DROP_TABLE = "DROP TABLE IF EXISTS " + DB_TABLE_NAME;
-        sqLiteDatabase.execSQL(DROP_TABLE);
         //      ********SwitchDB*********
         // id       switch_name     switch_state
         // value        value           value
@@ -114,9 +111,9 @@ public class SwitchDBHelper extends SQLiteOpenHelper {
         return switchSatate;
     }
     //delete table
-    public void deleteTable(String tableName) {
+    public void deleteTable() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String DROP_TABLE = "DROP TABLE IF EXISTS " + tableName;
+        String DROP_TABLE = "DROP TABLE IF EXISTS " + DB_TABLE_NAME;
         db.execSQL(DROP_TABLE);
     }
 }
