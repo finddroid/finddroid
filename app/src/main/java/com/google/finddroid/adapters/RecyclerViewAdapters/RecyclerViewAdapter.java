@@ -23,7 +23,10 @@ import com.google.finddroid.DBs.SwitchDBHelper;
 import com.google.finddroid.adapters.RecyclerViewAdapters.objectclasses.RecyclerItemObject;
 
 import java.util.ArrayList;
-
+/**
+ * In this file set switch , switch name, switch context
+ * set switch value in DB and make switch to show enable/disable
+ **/
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     ArrayList<RecyclerItemObject> arrayList;
     CheckAndRequestLocationPermission chackAndSendshowLocation=null;
@@ -49,26 +52,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int ButtonNumber=position;
-        holder.Title.setText(arrayList.get(position).getTitle());
-        holder.SubTitle.setText(arrayList.get(position).getSubTitle());
-        holder.mButton.setChecked(arrayList.get(position).getSwitchState());
-        //on touch listener to make switch on on touch
+        holder.Title.setText(arrayList.get(position).getTitle()); //set switch title
+        holder.SubTitle.setText(arrayList.get(position).getSubTitle()); //set switch context/subtitle
+        holder.mButton.setChecked(arrayList.get(position).getSwitchState()); //set switch state enable/disable
+
+        /** on touch listener to make switch enable/disable touch **/
         holder.mButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 //                Log.i("bool",Boolean.toString(b));
+                // call class to make switch action like ask permission access and other
                        new RecyclerSwitchClickAction(holder, context, ButtonNumber,b,chackAndSendshowLocation,GlobleView).executeAction();
-
             }
         });
-
-
-        //On touch condition on switch
+        /** On touch condition for switch **/
         holder.mButton.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    //call touch setter function to set if switch value in db and for frontend
                     touchConditionSetter(holder,ButtonNumber);
                 }else{
                     //pass
@@ -77,20 +80,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
     }
-
+    /** In this function make switch to show user enable/disable when user touch the switch and set it to switchDB **/
     public void touchConditionSetter(ViewHolder holder,int ButtonNumber){
         SwitchDBHelper switchDBHelper=new SwitchDBHelper(context);
         // i don't know how this code work so don't touch it because it works :)
         // button state and switch state to false
         if(holder.mButton.isChecked()) {
+            //when i set switch true it disable and when i set switch false it enable don't know why :)
             holder.mButton.setChecked(true);
+            //set switchDB state false ,switch is disable
             switchDBHelper.UpdateData(holder.Title.getText().toString(),false);
             switchDBHelper.close();
 
         }
         // button state and switch state to true
         else if(!holder.mButton.isChecked()){
+            //when i set switch true it disable and when i set switch false it enable don't know why :)
             holder.mButton.setChecked(false);
+            //set switchDB state true, switch is enable
             switchDBHelper.UpdateData(holder.Title.getText().toString(),true);
             switchDBHelper.close();
         }
@@ -114,7 +121,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         LinearLayout passwordPerent,passwordButtons;
         EditText password;
         Button passSetButton,passCancelButton;
-        RecyclerView rv;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Title=itemView.findViewById(R.id.list_item_title);

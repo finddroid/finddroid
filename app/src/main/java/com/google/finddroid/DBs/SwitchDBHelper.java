@@ -12,7 +12,12 @@ import androidx.annotation.Nullable;
 import com.google.finddroid.DBs.DBModels.DBDataModel;
 
 import java.util.ArrayList;
-
+/*** In this file create a database to hold the switch value enable/disable , switch name and switch context.
+ *  db name (SwitchDB)
+ *  current db version (1)
+ *  table name (switch)
+ *  table headers (id,switch_name,switch_context,switch_state)
+ *  ***/
 public class SwitchDBHelper extends SQLiteOpenHelper {
     //DB related var
     public static final String DB_NAME = "SwitchDB"; //DB NAME
@@ -47,7 +52,7 @@ public class SwitchDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-    //Check if table value is Empty
+    /**  this function check table is empty or not **/
     public boolean isEmpty(){
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("SELECT * FROM " + DB_TABLE_NAME, null);
@@ -62,7 +67,7 @@ public class SwitchDBHelper extends SQLiteOpenHelper {
         db.close();
         return isEmpty;
     }
-    //Insert new data
+    /** Insert new data **/
     public void InsertData(String switchName,String switchContext,Boolean switchState){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -71,7 +76,7 @@ public class SwitchDBHelper extends SQLiteOpenHelper {
         values.put(TABLE_SWITCH_STATE,switchState);
         db.insert(DB_TABLE_NAME,null,values);
     }
-    //fetch data
+    /** fetch data **/
     public ArrayList<DBDataModel> FetchData(){
         ArrayList<DBDataModel> dbList=new ArrayList<>();
         SQLiteDatabase db=this.getReadableDatabase();
@@ -88,7 +93,7 @@ public class SwitchDBHelper extends SQLiteOpenHelper {
         db.close();
         return dbList;
     }
-    //Update data
+    /** Update data **/
     public void UpdateData(String SwitchName,Boolean SwitchState){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -96,7 +101,7 @@ public class SwitchDBHelper extends SQLiteOpenHelper {
        db.update(DB_TABLE_NAME,contentValues,TABLE_SWITCH_NAME + " = ?", new String[]{SwitchName});
         db.close();
     }
-    //Check Switch state is it off or on
+    /** Check Switch state is it enable or disable **/
     public Boolean CheckSwitchState(String SwitchName){
         ArrayList<DBDataModel> arrayList=this.FetchData();
         Boolean switchSatate=null;
@@ -110,7 +115,7 @@ public class SwitchDBHelper extends SQLiteOpenHelper {
         }
         return switchSatate;
     }
-    //delete table
+    /** delete table (Not used yet)**/
     public void deleteTable() {
         SQLiteDatabase db = this.getWritableDatabase();
         String DROP_TABLE = "DROP TABLE IF EXISTS " + DB_TABLE_NAME;

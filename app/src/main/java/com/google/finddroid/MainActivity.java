@@ -48,7 +48,9 @@ import com.google.finddroid.global.SwitchDBGlobalVar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+/***
+ * This is Main file here only (location access), (viewpager) and (Nevbar/Actionbar).
+ ***/
 public class MainActivity extends AppCompatActivity {
     int BACKGROUND_LOCATION_PERMISSION_CODE = 1000;
     int LOCATION_PERMISSION_CODE = 2000;
@@ -66,22 +68,26 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });/// don't make code on this fucking
+
+
+        /*** HERE IS THE STARTING POINT OF CODE ***/
+        //notification permission
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1000);
         }
 
-        /* action bar setup */
+        /* calling notification service to start listen notifications*/
+        new NotificationListener();
+
+        /* SETUP ACTIONBAR */
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.actionbar_layout);
         getSupportActionBar().setElevation(0);
 
-
+        /** SETUP VIEWPAGER **/
         ViewPager vp = findViewById(R.id.main_viewpager);
         TabLayout tl = findViewById(R.id.main_tab_layout);
-        /* calling notification service to start listen notifications*/
-        new NotificationListener();
-
-        /* FragmentSetAdapter is viewpager */
+        /** FragmentSetAdapter is viewpager **/
         ViewPagerAdapter fsa = new ViewPagerAdapter(getSupportFragmentManager());
         vp.setAdapter(fsa);
         tl.setupWithViewPager(vp);
@@ -106,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         String versionName = packageInfo.versionName;
                         int versionCode = packageInfo.versionCode;
                         version = response.getString("version");
-//                        Log.i("version",versionName);
+                        Log.i(versionName,version);
                         if (!version.equals(versionName)){
                             ShowUpdateBox();
                         }
@@ -131,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
         volleyQueue.add(jsonObjectRequest);
 
     }
+
+
+
     /* update box for rquest user to update app */
     public void ShowUpdateBox(){
         Dialog dialog = new Dialog(MainActivity.this);
@@ -166,7 +175,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    /*don't play with bottom code it's part of BlankFragment location permission code i don't know how it's work but it's work :) */
+
+
+    /*NOTE: don't play with bottom code it's part of BlankFragment location permission code i don't know how it's work but it's work :) */
     private void askPermissionForBackgroundUsage() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
             ActivityCompat.requestPermissions(MainActivity.this,
@@ -193,6 +204,8 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_PERMISSION_CODE);
         }
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

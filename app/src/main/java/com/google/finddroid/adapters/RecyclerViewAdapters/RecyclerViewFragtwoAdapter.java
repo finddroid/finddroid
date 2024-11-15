@@ -20,6 +20,10 @@ import com.google.finddroid.adapters.RecyclerViewAdapters.objectclasses.Recycler
 
 import java.util.ArrayList;
 
+/** In this file set the commands and explain
+ * set command and explains
+ * set for reset password
+ * **/
 public class RecyclerViewFragtwoAdapter extends RecyclerView.Adapter<RecyclerViewFragtwoAdapter.ViewHolder> {
     ArrayList<RecyclerViewFragtwoAdapterObj> arrayList;
     Context mContext;

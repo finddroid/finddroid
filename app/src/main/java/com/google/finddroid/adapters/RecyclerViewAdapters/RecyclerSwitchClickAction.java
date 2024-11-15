@@ -25,7 +25,10 @@ import com.google.finddroid.MyDeviceAdminReceiver;
 import com.google.finddroid.NotificationListener;
 import com.google.finddroid.R;
 import com.google.finddroid.global.SwitchDBGlobalVar;
-
+/***
+ * In this file make switch to work.
+ * In this file switch don't intrect with db here only switch work for frontend things like permission access.
+ * ***/
 public class RecyclerSwitchClickAction {
     /***
      * switch 0 for Notification permission
@@ -35,7 +38,7 @@ public class RecyclerSwitchClickAction {
      * switch 4 for Location permission
      * switch 5 for Lockdevice permission (Admin needed)
      * switch 6 for Ring change permission (Admin needed)
-     * switch 7 for Controll with sms permission (Contect permission needed)
+     * switch 7 for Controll with sms permission (Contect and sms permission needed)
      * switch 8 and 9 for control with whatsapp and telegram permission (Accessablity needed)
      * switch 10 and 11 for anti switch off and anti mode change permission (Accessablity needed)
      * ***/
@@ -172,9 +175,7 @@ public class RecyclerSwitchClickAction {
     }
 
 
-
-
-
+    /** this function ask for password input **/
     public void passwordListItemRunner(){
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -186,10 +187,7 @@ public class RecyclerSwitchClickAction {
                 mholder.passwordPerent.startAnimation(animate);
             }
         },50);
-//            ViewGroup.LayoutParams params = mholder.cardView.getLayoutParams();
         mholder.passwordPerent.setVisibility(View.VISIBLE);
-
-//            params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, mContext.getResources().getDisplayMetrics());
         mholder.passSetButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UnsafeIntentLaunch")
             @Override
@@ -216,7 +214,7 @@ public class RecyclerSwitchClickAction {
             }
         });
     }
-
+    /** Accessibility Permission Setting sender it send to permission page not show the lottie anim **/
     public void AccessibilityPermissionOpener(){
         Intent accessibilityIntent= new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
         Bundle bundle = new Bundle();
@@ -231,6 +229,7 @@ public class RecyclerSwitchClickAction {
         mContext.startActivity(accessibilityIntent);
     }
 
+    /** Notification Permission Setting page sender it send to permission page setting not show the lottie anim **/
     public void NotificationPermissionOpener(){
         Intent accessibilityIntent= new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS);
         Bundle bundle = new Bundle();
@@ -245,6 +244,7 @@ public class RecyclerSwitchClickAction {
         mContext.startActivity(accessibilityIntent);
     }
 
+    /** Admin permission Asker **/
     public void ShowAdminPermissionDialogBox(){
         Dialog dialog = new Dialog(GlobelView.getContext());
         dialog.setContentView(R.layout.admin_lottie_alert_box);  // Set the custom layout
@@ -282,6 +282,7 @@ public class RecyclerSwitchClickAction {
         dialog.show();
     }
 
+    /** Show the lottie anim and then send to permission setting by calling  AccessibilityPermissionOpener() **/
     public void ShowAssesablityPermissionDialogBox(){
         Dialog dialog = new Dialog(GlobelView.getContext());
         dialog.setContentView(R.layout.accessablity_lottie_alert_box);  // Set the custom layout
@@ -315,6 +316,7 @@ public class RecyclerSwitchClickAction {
         dialog.show();
     }
 
+    /** Show lottie anim and send to permission page  by calling NotificationPermissionOpener()**/
     public void ShowNotificationPermissionBox(){
         Dialog dialog = new Dialog(GlobelView.getContext());
         dialog.setContentView(R.layout.notification_lotte_alert_box);  // Set the custom layout
