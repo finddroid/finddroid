@@ -2,6 +2,7 @@ package com.google.finddroid.commands;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
@@ -41,11 +42,13 @@ public class CommandReceiver{
         CommanderDBHelper commanderDBHelper = new CommanderDBHelper(context);
         // set string for command explain
         String USER_COMMANDS = "FINDDROID COMMANDS : \n\n"+
-                CommandsGlobalVar.FLESH_CONTROL_COMMAND + "on/" + "off \n" +
-                CommandsGlobalVar.LOCATION_COMMAND+"\n"+
-                CommandsGlobalVar.RING_MODE_COMMAND +CommandsGlobalVar.SILENT_RING + "/" + CommandsGlobalVar.NORMAL_RING +"\n"+
-                CommandsGlobalVar.LOCK_DEVICE_COMMAND+"\n"+
-                CommandsGlobalVar.END_FINDDROID_COMMAND+"\n";
+                "* "+CommandsGlobalVar.FLESH_CONTROL_COMMAND + "on/" + "off \n" +
+                "* "+CommandsGlobalVar.LOCATION_COMMAND+"\n"+
+                "* "+CommandsGlobalVar.RING_MODE_COMMAND +CommandsGlobalVar.SILENT_RING + "/" + CommandsGlobalVar.NORMAL_RING +"\n"+
+                "* "+CommandsGlobalVar.LOCK_DEVICE_COMMAND+"\n"+
+                "* "+CommandsGlobalVar.END_FINDDROID_COMMAND+"\n"+
+                "* "+CommandsGlobalVar.DISABLE_ANTI_SWITCHOFF+"\n"+
+                "* "+CommandsGlobalVar.ENABLE_ANTI_SWITCHOFF+"\n";
 
         //Auth the user given password is same the owner set if it is then set the user/number/id on commander_table and make to authenticated
         if(command.contains("fd".toLowerCase()) || command.contains("fd".toUpperCase()) || command.contains("Fd")){ //It run when user give fd in message
@@ -138,6 +141,14 @@ public class CommandReceiver{
             }else if (command.equalsIgnoreCase(CommandsGlobalVar.RING_MODE_COMMAND+CommandsGlobalVar.SILENT_RING) && switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.RING_MODE_ACCESS)){
                 new RingModeChanger(context).VibrationMode();
                 multiReplyer.sendReply("Ring mode change to Silent");
+            }else if(command.equalsIgnoreCase(CommandsGlobalVar.DISABLE_ANTI_SWITCHOFF)){
+                switchDBHelper.UpdateData(SwitchDBGlobalVar.ANTI_SWITCH_OFF,false);
+                multiReplyer.sendReply("Disable Anti Switch-off");
+            } else if (command.equalsIgnoreCase(CommandsGlobalVar.ENABLE_ANTI_SWITCHOFF)) {
+                switchDBHelper.UpdateData(SwitchDBGlobalVar.ANTI_SWITCH_OFF,true);
+                multiReplyer.sendReply("Enable Anti Switch-off");
+            }else if(command.equalsIgnoreCase("loc")){
+
             }
         }
     }

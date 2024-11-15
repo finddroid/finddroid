@@ -88,6 +88,8 @@ public class FragmentTwoSettings extends Fragment{
         itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.LOCK_DEVICE_COMMAND,CommandsGlobalVar.Description.LOCK_DEVICE_COMMAND_DESCRIPTION));
         itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.RING_MODE_COMMAND + CommandsGlobalVar.NORMAL_RING + "/" + CommandsGlobalVar.SILENT_RING,CommandsGlobalVar.Description.RING_MODE_COMMAND_DESCRIPTION));
         itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.END_FINDDROID_COMMAND,CommandsGlobalVar.Description.END_FINDDROI_COMMAND_DESCRIPTION));
+        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.DISABLE_ANTI_SWITCHOFF,CommandsGlobalVar.Description.DISABLE_ANIT_SWITCHOFF_DESCRIPTION));
+        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.ENABLE_ANTI_SWITCHOFF,CommandsGlobalVar.Description.ENABLE_ANTI_SWITCHOFF_DESCRIPTION));
         recyclerView.setAdapter(new RecyclerViewFragtwoAdapter(getContext(),itemList));
     }
 

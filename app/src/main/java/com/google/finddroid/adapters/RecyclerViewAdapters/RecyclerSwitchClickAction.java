@@ -149,6 +149,7 @@ public class RecyclerSwitchClickAction {
             String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_accessibility_services");
             final boolean enabled = flat != null && flat.contains(cn.flattenToString());
             //If permission not granted it show the lottie anim and ask user to enable it
+
             if(!enabled) {
                 ShowAssesablityPermissionDialogBox();
             }

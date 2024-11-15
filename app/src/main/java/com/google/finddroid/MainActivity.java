@@ -6,7 +6,10 @@ import android.app.Dialog;
 
 import com.android.volley.Response;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -70,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
         });/// don't make code on this fucking
 
 
+
         /*** HERE IS THE STARTING POINT OF CODE ***/
         //notification permission
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1000);
         }
-
         /* calling notification service to start listen notifications*/
         new NotificationListener();
 

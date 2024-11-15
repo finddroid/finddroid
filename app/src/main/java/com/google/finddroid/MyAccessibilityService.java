@@ -41,7 +41,6 @@ public class MyAccessibilityService extends AccessibilityService {
 //    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
-
         String event = accessibilityEvent.getText().toString().toLowerCase();
         KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 //            sendHome(268435456);
@@ -69,10 +68,7 @@ public class MyAccessibilityService extends AccessibilityService {
         } else if (event.contains("quick settings") && keyguardManager.isDeviceLocked() && isAnitModeChange) {
             block();
             new CommandRunner(getApplicationContext()).executeLockScreen(true);
-        }// else if(XiaomiSwitchoffAction(accessibilityNodeInfo) && keyguardManager.isDeviceLocked() && isAntipoweroff){
-//            block();
-//            new CommandRunner(getApplicationContext()).executeLockScreen(true);
-//        }
+        }
 
     }
 //    private void extractTextFromNode(AccessibilityNodeInfo node) {
