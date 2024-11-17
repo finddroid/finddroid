@@ -60,7 +60,7 @@ public class MyAccessibilityService extends AccessibilityService {
         SwitchDBHelper switchDBHelper = new SwitchDBHelper(getApplicationContext());
             boolean isAntipoweroff = switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.ANTI_SWITCH_OFF);
             boolean isAnitModeChange = switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.ANTI_MODE_CHANGE);
-        if(event.contains("Phone options".toLowerCase()) && isAnitModeChange && keyguardManager.isDeviceLocked()){
+        if(event.contains("Phone options".toLowerCase()) && isAntipoweroff && keyguardManager.isDeviceLocked()){
                 final boolean deviceLocked = keyguardManager.isDeviceLocked();
                 new CommandRunner(getApplicationContext()).executeLockScreen(true);
 //              sendHome(268435456);
