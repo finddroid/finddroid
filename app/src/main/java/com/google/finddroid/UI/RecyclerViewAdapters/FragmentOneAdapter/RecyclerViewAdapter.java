@@ -1,8 +1,7 @@
-package com.google.finddroid.adapters.RecyclerViewAdapters;
+package com.google.finddroid.UI.RecyclerViewAdapters.FragmentOneAdapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.finddroid.R;
 import com.google.finddroid.DBs.SwitchDBHelper;
-import com.google.finddroid.adapters.RecyclerViewAdapters.objectclasses.RecyclerItemObject;
+import com.google.finddroid.UI.RecyclerViewAdapters.objectclasses.RecyclerViewFragOneAdapterObj;
 
 import java.util.ArrayList;
 /**
@@ -28,11 +27,11 @@ import java.util.ArrayList;
  * set switch value in DB and make switch to show enable/disable
  **/
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    ArrayList<RecyclerItemObject> arrayList;
+    ArrayList<RecyclerViewFragOneAdapterObj> arrayList;
     CheckAndRequestLocationPermission chackAndSendshowLocation=null;
     Context context;
     View GlobleView;
-    public RecyclerViewAdapter(Context mContext, ArrayList<RecyclerItemObject> marrayList, CheckAndRequestLocationPermission checkAndRequestLocationPermission,View view){
+    public RecyclerViewAdapter(Context mContext, ArrayList<RecyclerViewFragOneAdapterObj> marrayList, CheckAndRequestLocationPermission checkAndRequestLocationPermission, View view){
         this.arrayList=marrayList;
         this.chackAndSendshowLocation= checkAndRequestLocationPermission;
 //        this.context=mContext;

@@ -1,4 +1,4 @@
-package com.google.finddroid.fragments;
+package com.google.finddroid.UI.fragments;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -24,15 +24,15 @@ import com.google.finddroid.DBs.SwitchDBHelper;
 import com.google.finddroid.DBs.DBModels.DBDataModel;
 import com.google.finddroid.MainActivity;
 import com.google.finddroid.R;
-import com.google.finddroid.adapters.RecyclerViewAdapters.CheckAndRequestLocationPermission;
-import com.google.finddroid.adapters.RecyclerViewAdapters.objectclasses.RecyclerItemObject;
-import com.google.finddroid.adapters.RecyclerViewAdapters.RecyclerViewAdapter;
+import com.google.finddroid.UI.RecyclerViewAdapters.FragmentOneAdapter.CheckAndRequestLocationPermission;
+import com.google.finddroid.UI.RecyclerViewAdapters.objectclasses.RecyclerViewFragOneAdapterObj;
+import com.google.finddroid.UI.RecyclerViewAdapters.FragmentOneAdapter.RecyclerViewAdapter;
 import com.google.finddroid.global.SwitchDBGlobalVar;
 
 import java.util.ArrayList;
 
 
-public class BlankFragmentOne extends Fragment implements CheckAndRequestLocationPermission {
+public class FragmentOneSettings extends Fragment implements CheckAndRequestLocationPermission {
 
     int LOCATION_PERMISSION_CODE = 2000;
     int BACKGROUND_LOCATION_PERMISSION_CODE = 3000;
@@ -45,7 +45,7 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
     private String mParam1;
     private String mParam2;
 
-    public BlankFragmentOne() {
+    public FragmentOneSettings() {
         // Required empty public constructor
     }
 
@@ -55,11 +55,11 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragmentOne.
+     * @return A new instance of fragment FragmentOneSettings.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlankFragmentOne newInstance(String param1, String param2) {
-        BlankFragmentOne fragment = new BlankFragmentOne();
+    public static FragmentOneSettings newInstance(String param1, String param2) {
+        FragmentOneSettings fragment = new FragmentOneSettings();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -90,18 +90,18 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
 
         if (db.isEmpty()) {
             SwitchDBHelper switchDBHelper = new SwitchDBHelper(getContext());
-            switchDBHelper.InsertData(SwitchDBGlobalVar.NOTIFICATION_ACCESS,"necessary to enable", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.ACCESSIBILITY_ACCESS,"necessary for some functionality", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.ADMIN_ACCESS,"necessary for lock functionality", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.SET_PASSWORD,"set password to control", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.LOCATION_ACCESS,"necessary to get location",false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.LOCK_FROM_COMMAND,"necessary to lock device by command",false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.RING_MODE_ACCESS,"necessary to change ring mode",false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.NOTIFICATION_ACCESS,"Enable if your android upper version then Android 12", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.ACCESSIBILITY_ACCESS,"required for some functionality", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.ADMIN_ACCESS,"necessary for lock & Disable Notification panel and Power Menu on lock screen", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.SET_PASSWORD,"set password to Authenticate Commands", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.LOCATION_ACCESS,"required to get location",false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.LOCK_FROM_COMMAND,"required to lock device by command",false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.RING_MODE_ACCESS,"required to change ring mode",false);
             switchDBHelper.InsertData(SwitchDBGlobalVar.SMS_ACCESS,"Control Device from SMS",false);
             switchDBHelper.InsertData(SwitchDBGlobalVar.WHATSAPP_ACCESS,"Control Device from Whatsapp message", false);
             switchDBHelper.InsertData(SwitchDBGlobalVar.TELEGRAM_ACCESS,"Control Device from Telegram message", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.ANTI_SWITCH_OFF,"Device can't be power off until unlock", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.ANTI_MODE_CHANGE,"Can't Change Mode (flight mode,internet) until unlock",false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.ANTI_SWITCH_OFF,"Device can't be power off until unlock Enable if your Android Version Lower then Android 12", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.ANTI_MODE_CHANGE,"Can't Change Mode (flight mode,internet) until unlock Enable if your Android Version Lower then Android 12",false);
         } else {
             try {
                 int accessEnabled = Settings.Secure.getInt(MainActivity.main.getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED);
@@ -119,12 +119,12 @@ public class BlankFragmentOne extends Fragment implements CheckAndRequestLocatio
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         SwitchDBHelper switchDBHelper=new SwitchDBHelper(getContext());
         ArrayList<DBDataModel> data= switchDBHelper.FetchData();
-        ArrayList<RecyclerItemObject> arrayList = new ArrayList<RecyclerItemObject>();
+        ArrayList<RecyclerViewFragOneAdapterObj> arrayList = new ArrayList<RecyclerViewFragOneAdapterObj>();
         for (int i=0;i<data.size();i++){
             String title=data.get(i).switchName;
             String subtitle=data.get(i).switchContext;
             Boolean state=data.get(i).switchState;
-            arrayList.add(new RecyclerItemObject(title,subtitle,state));
+            arrayList.add(new RecyclerViewFragOneAdapterObj(title,subtitle,state));
         }
         RecyclerViewAdapter rva=new RecyclerViewAdapter(getContext(),arrayList,this,view);
         //set recycler view to not recycle for 12 items

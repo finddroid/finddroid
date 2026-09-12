@@ -2,9 +2,9 @@
     <string name="app_name">FindDroid</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="changed_app_name">finddroid</string>
+    <string name="changed_app_name">FindDroid</string>
     <string name="recycler_edit_box">Password</string>
-    <string name="accessibility_service_label">FINDROID</string>
+    <string name="accessibility_service_label">FindDroid</string>
     <string name="accessibility_service_description">Necessary for access</string>
     <string name="title_activity_settings">SettingsActivity</string>
 

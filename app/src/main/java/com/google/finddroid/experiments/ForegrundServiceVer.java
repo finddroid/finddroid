@@ -1,4 +1,4 @@
-package com.google.finddroid;
+package com.google.finddroid.experiments;
 
 /* NOT USED YET IT'S PART  OF FOREGROUND SERVICE  */
 public class ForegrundServiceVer {

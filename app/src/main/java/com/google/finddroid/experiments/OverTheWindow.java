@@ -1,4 +1,4 @@
-package com.google.finddroid;
+package com.google.finddroid.experiments;
 
 import static android.content.Context.WINDOW_SERVICE;
 
@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import androidx.annotation.RequiresApi;
+
+import com.google.finddroid.R;
+
 /* NOT USED YET MAYBE IN FUTURE */
 public class OverTheWindow {
     private Context context;

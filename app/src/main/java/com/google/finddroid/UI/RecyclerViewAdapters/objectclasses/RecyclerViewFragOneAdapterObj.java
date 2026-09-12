@@ -1,10 +1,10 @@
-package com.google.finddroid.adapters.RecyclerViewAdapters.objectclasses;
+package com.google.finddroid.UI.RecyclerViewAdapters.objectclasses;
 
-public class RecyclerItemObject {
+public class RecyclerViewFragOneAdapterObj {
     private String Title;
     private String SubTitle;
     private Boolean SwitchState;
-    public RecyclerItemObject(String s,String Subtitle,Boolean switchState){
+    public RecyclerViewFragOneAdapterObj(String s, String Subtitle, Boolean switchState){
         this.Title=s;
         this.SubTitle=Subtitle;
         this.SwitchState=switchState;

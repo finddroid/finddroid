@@ -2,7 +2,7 @@
 <resources>
     <color name="prm">#171F24</color>
     <color name="myclr">#568ab7</color>
-    <color name="White">#FFFFFF</color>
+<!--    <color name="White">#FFFFFF</color>-->
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>
     <color name="Yellow">#FFFF00</color>
@@ -97,7 +97,7 @@
     <color name="SkyBlue">#87CEEB</color>
     <color name="Gray">#808080</color>
     <color name="Olive">#808000</color>
-    <color name="Purple">#800080</color>
+<!--    <color name="Purple">#800080</color>-->
     <color name="Maroon">#800000</color>
     <color name="Aquamarine">#7FFFD4</color>
     <color name="Chartreuse">#7FFF00</color>
@@ -142,4 +142,27 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="black">#000000</color>
+
+
+        <!-- FindDroid dark UI -->
+        <color name="fd_background">#0B0F0D</color>
+        <color name="fd_surface">#121815</color>
+        <color name="fd_surface_light">#18211C</color>
+
+        <!-- Text -->
+        <color name="fd_text_primary">#F1F5F2</color>
+        <color name="fd_text_secondary">#9AA69F</color>
+
+        <!-- Borders / dividers -->
+        <color name="fd_border">#26332C</color>
+
+        <!-- Brand -->
+<!--        <color name="prm">#19D66B</color>-->
+        <color name="Purple">#7C5CFF</color>
+
+        <!-- Common -->
+        <color name="White">#FFFFFF</color>
+        <color name="Black">#000000</color>
+
+
 </resources>

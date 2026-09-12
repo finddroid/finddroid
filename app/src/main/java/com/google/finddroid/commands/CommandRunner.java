@@ -35,5 +35,8 @@ public class CommandRunner {
             devicePolicyManager.lockNow();
         }
     }
+    public void disableLockScreenNotificationBar(){
+
+    }
 
 }

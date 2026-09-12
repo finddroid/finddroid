@@ -1,4 +1,4 @@
-package com.google.finddroid;
+package com.google.finddroid.experiments;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,8 +12,11 @@ import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.ServiceCompat;
 
+import com.google.finddroid.R;
 import com.google.finddroid.commands.RingModeChanger;
 /* NOTE USED YET I USE THIS FOR SOME EXPERIMENT */
+
+
 public class ForegroundService extends Service {
 
     public int NOTIFICATION_ID = 100;

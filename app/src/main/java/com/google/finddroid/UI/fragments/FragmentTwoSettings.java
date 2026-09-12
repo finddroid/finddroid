@@ -1,4 +1,4 @@
-package com.google.finddroid.fragments;
+package com.google.finddroid.UI.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -19,8 +19,8 @@ import android.widget.Toast;
 import com.google.finddroid.DBs.CommanderDBHelper;
 import com.google.finddroid.MainActivity;
 import com.google.finddroid.R;
-import com.google.finddroid.adapters.RecyclerViewAdapters.RecyclerViewFragtwoAdapter;
-import com.google.finddroid.adapters.RecyclerViewAdapters.objectclasses.RecyclerViewFragtwoAdapterObj;
+import com.google.finddroid.UI.RecyclerViewAdapters.FragmentTwoAdapter.RecyclerViewFragtwoAdapter;
+import com.google.finddroid.UI.RecyclerViewAdapters.objectclasses.RecyclerViewFragTwoAdapterObj;
 import com.google.finddroid.global.CommandsGlobalVar;
 //import com.google.finddroid.adapters.RecyclerViewFragtwoClickable;;
 
@@ -75,21 +75,19 @@ public class FragmentTwoSettings extends Fragment{
         RecyclerView recyclerView = view.findViewById(R.id.fragment_two_recycler_view);
         CommanderDBHelper commanderDBHelper = new CommanderDBHelper(getContext());
         String currentPassword=commanderDBHelper.FetchDataFromCommanderPassword();
-        ArrayList<RecyclerViewFragtwoAdapterObj> itemList=new ArrayList<>();
+        ArrayList<RecyclerViewFragTwoAdapterObj> itemList=new ArrayList<>();
         if(commanderDBHelper.isEmptyCommanderPassword()) {
-//            itemList.add(new RecyclerViewFragtwoAdapterObj("Set Password","set password to control"));
+//            itemList.add(new RecyclerViewFragTwoAdapterObj("Set Password","set password to control"));
         }else {
-            itemList.add(new RecyclerViewFragtwoAdapterObj("Reset Password", "current is " + currentPassword));
+            itemList.add(new RecyclerViewFragTwoAdapterObj("Reset Password", "current is " + currentPassword));
             isRestShow = true;
         }
-        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.START_FINDDROID_COMMAND +currentPassword,CommandsGlobalVar.Description.START_FINDDROID_COMMAND_DESCRIPTION));
-        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.FLESH_CONTROL_COMMAND +"on/off",CommandsGlobalVar.Description.FLESH_CONTROL_COMMAND_DESCRIPTION));
-        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.LOCATION_COMMAND,CommandsGlobalVar.Description.LOCATION_COMMAND_DESCRIPTION));
-        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.LOCK_DEVICE_COMMAND,CommandsGlobalVar.Description.LOCK_DEVICE_COMMAND_DESCRIPTION));
-        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.RING_MODE_COMMAND + CommandsGlobalVar.NORMAL_RING + "/" + CommandsGlobalVar.SILENT_RING,CommandsGlobalVar.Description.RING_MODE_COMMAND_DESCRIPTION));
-        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.END_FINDDROID_COMMAND,CommandsGlobalVar.Description.END_FINDDROI_COMMAND_DESCRIPTION));
-        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.DISABLE_ANTI_SWITCHOFF,CommandsGlobalVar.Description.DISABLE_ANIT_SWITCHOFF_DESCRIPTION));
-        itemList.add(new RecyclerViewFragtwoAdapterObj(CommandsGlobalVar.ENABLE_ANTI_SWITCHOFF,CommandsGlobalVar.Description.ENABLE_ANTI_SWITCHOFF_DESCRIPTION));
+        itemList.add(new RecyclerViewFragTwoAdapterObj(CommandsGlobalVar.START_FINDDROID_COMMAND +currentPassword,CommandsGlobalVar.Description.START_FINDDROID_COMMAND_DESCRIPTION));
+        itemList.add(new RecyclerViewFragTwoAdapterObj(CommandsGlobalVar.FLESH_CONTROL_COMMAND +"on/off",CommandsGlobalVar.Description.FLESH_CONTROL_COMMAND_DESCRIPTION));
+        itemList.add(new RecyclerViewFragTwoAdapterObj(CommandsGlobalVar.LOCATION_COMMAND,CommandsGlobalVar.Description.LOCATION_COMMAND_DESCRIPTION));
+        itemList.add(new RecyclerViewFragTwoAdapterObj(CommandsGlobalVar.LOCK_DEVICE_COMMAND,CommandsGlobalVar.Description.LOCK_DEVICE_COMMAND_DESCRIPTION));
+        itemList.add(new RecyclerViewFragTwoAdapterObj(CommandsGlobalVar.RING_MODE_COMMAND + CommandsGlobalVar.NORMAL_RING + " /" + CommandsGlobalVar.SILENT_RING,CommandsGlobalVar.Description.RING_MODE_COMMAND_DESCRIPTION));
+        itemList.add(new RecyclerViewFragTwoAdapterObj(CommandsGlobalVar.END_FINDDROID_COMMAND,CommandsGlobalVar.Description.END_FINDDROI_COMMAND_DESCRIPTION));
         recyclerView.setAdapter(new RecyclerViewFragtwoAdapter(getContext(),itemList));
     }
 

@@ -1,4 +1,4 @@
-package com.google.finddroid.adapters.RecyclerViewAdapters;
+package com.google.finddroid.UI.RecyclerViewAdapters.FragmentTwoAdapter;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.finddroid.DBs.CommanderDBHelper;
 import com.google.finddroid.MainActivity;
 import com.google.finddroid.R;
-import com.google.finddroid.adapters.RecyclerViewAdapters.objectclasses.RecyclerViewFragtwoAdapterObj;
+import com.google.finddroid.UI.RecyclerViewAdapters.objectclasses.RecyclerViewFragTwoAdapterObj;
 
 import java.util.ArrayList;
 
@@ -25,9 +25,9 @@ import java.util.ArrayList;
  * set for reset password
  * **/
 public class RecyclerViewFragtwoAdapter extends RecyclerView.Adapter<RecyclerViewFragtwoAdapter.ViewHolder> {
-    ArrayList<RecyclerViewFragtwoAdapterObj> arrayList;
+    ArrayList<RecyclerViewFragTwoAdapterObj> arrayList;
     Context mContext;
-    public RecyclerViewFragtwoAdapter(Context context, ArrayList<RecyclerViewFragtwoAdapterObj> ItemList){
+    public RecyclerViewFragtwoAdapter(Context context, ArrayList<RecyclerViewFragTwoAdapterObj> ItemList){
         this.arrayList=ItemList;
 //        this.mContext=context;
     }

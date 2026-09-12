@@ -16,5 +16,66 @@
         <item name="android:background">@color/cardview_dark_background</item>
     </style>
 
-    <!--    <style name="Theme.Tryapp2" parent="Theme.FindDroid" />-->
+<!--        <style name="Theme.FindDroid" parent="Theme.AppCompat.DayNight">-->
+
+<!--            &lt;!&ndash; Brand colors &ndash;&gt;-->
+<!--            <item name="colorPrimary">@color/prm</item>-->
+<!--            <item name="colorPrimaryDark">@color/prm</item>-->
+<!--            <item name="colorAccent">@color/Purple</item>-->
+
+<!--            &lt;!&ndash; Window &ndash;&gt;-->
+<!--            <item name="android:windowBackground">@color/fd_background</item>-->
+<!--            <item name="android:navigationBarColor">@color/fd_background</item>-->
+<!--            <item name="android:statusBarColor">@color/fd_background</item>-->
+
+<!--            &lt;!&ndash; Light status bar disabled &ndash;&gt;-->
+<!--            <item name="android:windowLightStatusBar">false</item>-->
+<!--&lt;!&ndash;            <item name="android:windowLightNavigationBar">false</item>&ndash;&gt;-->
+
+<!--            &lt;!&ndash; Text &ndash;&gt;-->
+<!--            <item name="android:textColorPrimary">@color/fd_text_primary</item>-->
+<!--            <item name="android:textColorSecondary">@color/fd_text_secondary</item>-->
+
+<!--            &lt;!&ndash; Disable default action bar &ndash;&gt;-->
+<!--            <item name="windowActionModeOverlay">true</item>-->
+
+<!--        </style>-->
+
+
+<!--        &lt;!&ndash; Main screen theme &ndash;&gt;-->
+<!--        <style name="main_view" parent="Theme.AppCompat.DayNight.NoActionBar">-->
+
+<!--            <item name="colorPrimary">@color/prm</item>-->
+<!--            <item name="colorPrimaryDark">@color/prm</item>-->
+<!--            <item name="colorAccent">@color/Purple</item>-->
+
+<!--            <item name="android:windowBackground">@color/fd_background</item>-->
+
+<!--            <item name="android:statusBarColor">@color/fd_background</item>-->
+<!--            <item name="android:navigationBarColor">@color/fd_background</item>-->
+
+<!--            <item name="android:windowLightStatusBar">false</item>-->
+<!--&lt;!&ndash;            <item name="android:windowLightNavigationBar">false</item>&ndash;&gt;-->
+
+<!--            <item name="android:textColor">@color/fd_text_primary</item>-->
+<!--            <item name="android:textColorPrimary">@color/fd_text_primary</item>-->
+<!--            <item name="android:textColorSecondary">@color/fd_text_secondary</item>-->
+
+<!--        </style>-->
+
+
+<!--        &lt;!&ndash; Modern dark dialog &ndash;&gt;-->
+<!--        <style name="MyDialogTheme" parent="Theme.AppCompat.Dialog.Alert">-->
+
+<!--            <item name="android:background">@color/fd_surface</item>-->
+
+<!--            <item name="android:textColorPrimary">@color/fd_text_primary</item>-->
+<!--            <item name="android:textColorSecondary">@color/fd_text_secondary</item>-->
+
+<!--            <item name="colorAccent">@color/Purple</item>-->
+
+<!--            <item name="android:windowMinWidthMajor">90%</item>-->
+<!--            <item name="android:windowMinWidthMinor">90%</item>-->
+
+<!--        </style>-->
 </resources>

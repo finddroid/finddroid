@@ -1,5 +1,7 @@
 package com.google.finddroid.global;
 
+/* Switch Title Define here */
+
 public class SwitchDBGlobalVar {
     public static String NOTIFICATION_ACCESS = "Notification Access";
     public static String ACCESSIBILITY_ACCESS = "Accessibility Access";

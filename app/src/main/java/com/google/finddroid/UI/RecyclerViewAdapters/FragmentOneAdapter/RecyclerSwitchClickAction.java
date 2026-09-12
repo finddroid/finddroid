@@ -1,4 +1,4 @@
-package com.google.finddroid.adapters.RecyclerViewAdapters;
+package com.google.finddroid.UI.RecyclerViewAdapters.FragmentOneAdapter;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -21,7 +21,7 @@ import com.google.finddroid.DBs.CommanderDBHelper;
 import com.google.finddroid.DBs.SwitchDBHelper;
 import com.google.finddroid.MainActivity;
 import com.google.finddroid.MyAccessibilityService;
-import com.google.finddroid.MyDeviceAdminReceiver;
+import com.google.finddroid.MyAdminReceiver;
 import com.google.finddroid.NotificationListener;
 import com.google.finddroid.R;
 import com.google.finddroid.global.SwitchDBGlobalVar;
@@ -50,6 +50,7 @@ public class RecyclerSwitchClickAction {
     RecyclerViewAdapter.ViewHolder mholder;
     boolean SwitchState;
     View GlobelView;
+    SwitchDBHelper switchDBHelper;
     public RecyclerSwitchClickAction(RecyclerViewAdapter.ViewHolder holder, Context context, int postion, boolean state, CheckAndRequestLocationPermission checkAndRequestLocationPermission,View view){
         this.mPostion=postion;
         this.mContext=context;
@@ -57,6 +58,7 @@ public class RecyclerSwitchClickAction {
         this.SwitchState=state;
         this.checkAndRequestLocationPermission = checkAndRequestLocationPermission;
         this.GlobelView=view;
+        switchDBHelper= new SwitchDBHelper(mContext);
     }
 
     //execute and check the state of switch to perform action
@@ -106,9 +108,13 @@ public class RecyclerSwitchClickAction {
             checkAndRequestLocationPermission.LocationClicked();
         }
         else if (mPostion==5) {//LOCK DEVICE SWITCH
-            ShowAdminPermissionDialogBox();
+            if(!switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.ADMIN_ACCESS)) {
+                ShowAdminPermissionDialogBox();
+            }
         }else if(mPostion==6){//RING MODE SWITCH
-            ShowAdminPermissionDialogBox();
+            if(!switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.ADMIN_ACCESS)) {
+                ShowAdminPermissionDialogBox();
+            }
         }else if(mPostion==7){//CONTECT PERMISSION SWITCH
             String[] permissions = {Manifest.permission.READ_CONTACTS, Manifest.permission.SEND_SMS};
             MainActivity.main.requestPermissions(permissions,3000);
@@ -120,7 +126,7 @@ public class RecyclerSwitchClickAction {
             final boolean enabled = flat != null && flat.contains(cn.flattenToString());
             //If permission not granted it show the lottie anim and ask user to enable it
             if(!enabled) {
-                ShowAssesablityPermissionDialogBox();
+                ShowNotificationPermissionBox();
             }
         }
         else if (mPostion==9) {//CONTROL WITH TELEGRAM PERMISSION
@@ -130,7 +136,7 @@ public class RecyclerSwitchClickAction {
             final boolean enabled = flat != null && flat.contains(cn.flattenToString());
             //If permission not granted it show the lottie anim and ask user to enable it
             if(!enabled) {
-                ShowAssesablityPermissionDialogBox();
+                ShowNotificationPermissionBox();
             }
         }
         else if(mPostion==10){//ANTI SWITCH OFF PERMISSION
@@ -263,9 +269,9 @@ public class RecyclerSwitchClickAction {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-                ComponentName componentName = new ComponentName(mContext, MyDeviceAdminReceiver.class);
+                ComponentName componentName = new ComponentName(mContext, MyAdminReceiver.class);
                 intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
-                intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "You need to enable the app as a device administrator to turn off the screen.");
+                intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "User need to enable the app as a device administrator to turn off the screen.");
                 mContext.startActivity(intent);
                 dialog.dismiss();
             }
@@ -275,7 +281,6 @@ public class RecyclerSwitchClickAction {
             public void onClick(View view) {
                 dialog.dismiss();
                 mholder.mButton.setChecked(false);
-                SwitchDBHelper switchDBHelper = new SwitchDBHelper(mContext);
                 switchDBHelper.UpdateData(SwitchDBGlobalVar.ADMIN_ACCESS,false);
             }
         });
@@ -309,7 +314,6 @@ public class RecyclerSwitchClickAction {
             public void onClick(View view) {
                 dialog.dismiss();
                 mholder.mButton.setChecked(false);
-                SwitchDBHelper switchDBHelper = new SwitchDBHelper(mContext);
                 switchDBHelper.UpdateData(SwitchDBGlobalVar.ACCESSIBILITY_ACCESS,false);
             }
         });
@@ -343,7 +347,6 @@ public class RecyclerSwitchClickAction {
             public void onClick(View view) {
                 dialog.dismiss();
                 mholder.mButton.setChecked(false);
-                SwitchDBHelper switchDBHelper = new SwitchDBHelper(mContext);
                 switchDBHelper.UpdateData(SwitchDBGlobalVar.NOTIFICATION_ACCESS,false);
             }
         });

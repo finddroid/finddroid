@@ -1,4 +1,9 @@
-package com.google.finddroid;
+package com.google.finddroid.UI;
+
+/*
+* The Tabs are define here in this file Setup / Passward and Commands
+ */
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,10 +11,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.google.finddroid.fragments.BlankFragmentOne;
-import com.google.finddroid.fragments.FragmentTwoSettings;
+import com.google.finddroid.UI.fragments.FragmentOneSettings;
+import com.google.finddroid.UI.fragments.FragmentTwoSettings;
+
+
 
 public class ViewPagerAdapter extends  FragmentPagerAdapter{
+
+
 
 
     public ViewPagerAdapter(@NonNull FragmentManager fm) {
@@ -21,7 +30,7 @@ public class ViewPagerAdapter extends  FragmentPagerAdapter{
     public Fragment getItem(int position) {
         Fragment fragment;
         if(position==0){
-            fragment=new BlankFragmentOne();
+            fragment=new FragmentOneSettings();
         }else {
             fragment=new FragmentTwoSettings();
         }

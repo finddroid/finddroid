@@ -1,11 +1,10 @@
-package com.google.finddroid;
+package com.google.finddroid.experiments;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.biometrics.BiometricPrompt;
 import android.os.Build;
 import android.os.CancellationSignal;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 

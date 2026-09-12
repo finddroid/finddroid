@@ -1,9 +1,9 @@
-package com.google.finddroid.adapters.RecyclerViewAdapters.objectclasses;
+package com.google.finddroid.UI.RecyclerViewAdapters.objectclasses;
 
-public class RecyclerViewFragtwoAdapterObj {
+public class RecyclerViewFragTwoAdapterObj {
     String title;
     String subtile;
-    public RecyclerViewFragtwoAdapterObj(String Title,String SubTitle){
+    public RecyclerViewFragTwoAdapterObj(String Title, String SubTitle){
         this.title=Title;
         this.subtile=SubTitle;
     }

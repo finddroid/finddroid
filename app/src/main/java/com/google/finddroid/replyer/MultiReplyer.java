@@ -1,5 +1,6 @@
 package com.google.finddroid.replyer;
 
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -13,27 +14,33 @@ import com.google.finddroid.DBs.SwitchDBHelper;
 import com.google.finddroid.commands.ContectGrapper;
 import com.google.finddroid.global.SwitchDBGlobalVar;
 
+
+/**
+ * All reply logic and functions sets here the args in this class get from NotificationListener.java class
+ */
 public class MultiReplyer {
     StatusBarNotification sbn;
     Context context;
-//    String GOOGLE_SMS_REPLY_KEY = "android.intent.extra.TEXT";
-    String WHATSAPP_REPLY_KEY = "direct_reply_input";
-    String TELEGRAM_REPLY_KEY = "extra_voice_reply";
-    public MultiReplyer(StatusBarNotification statusBarNotification , Context mContext){
-        this.sbn=statusBarNotification;
-        this.context=mContext;
+
+    //    String GOOGLE_SMS_REPLY_KEY = "android.intent.extra.TEXT";
+//    String WHATSAPP_REPLY_KEY = "direct_reply_input";
+//    String TELEGRAM_REPLY_KEY = "extra_voice_reply";
+    public MultiReplyer(StatusBarNotification statusBarNotification, Context mContext) {
+        this.sbn = statusBarNotification;
+        this.context = mContext;
     }
-    public void sendReply(String reply){
+
+    public void sendReply(String reply) {
         SwitchDBHelper switchDBHelper = new SwitchDBHelper(context);
         String REPLY_KEY;
-        if(sbn.getPackageName().contains("whatsapp") && switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.WHATSAPP_ACCESS)){
-            REPLY_KEY=WHATSAPP_REPLY_KEY;
-            Reply(reply,REPLY_KEY);
-        }else if (sbn.getPackageName().contains("telegram") && switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.TELEGRAM_ACCESS)){
-            REPLY_KEY=TELEGRAM_REPLY_KEY;
-            Reply(reply,REPLY_KEY);
-        }else{
-            if(switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.SMS_ACCESS)){
+        if (sbn.getPackageName().contains("whatsapp") && switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.WHATSAPP_ACCESS)) {
+            REPLY_KEY = keyGraper(sbn);
+            Reply(reply, REPLY_KEY);
+        } else if (sbn.getPackageName().contains("telegram") && switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.TELEGRAM_ACCESS)) {
+            REPLY_KEY = keyGraper(sbn);
+            Reply(reply, REPLY_KEY);
+        } else {
+            if (switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.SMS_ACCESS)) {
                 SMSReply(reply);
             }
         }
@@ -41,38 +48,26 @@ public class MultiReplyer {
     }
 
 
-    public void Reply(String reply,String REPLY_KEY){
+    public void Reply(String reply, String REPLY_KEY) {
         try {
-            Bundle extras = sbn.getNotification().extras;
-//        Notification.Action[] actions = sbn.getNotification().actions;
             PendingIntent replyPendingIntent = sbn.getNotification().actions[0].actionIntent;
-//        Log.i("is_error",Boolean.toString(sbn.getNotification().actions[0].actionIntent == null));
 
-//        Log.i("pandintent",replyPendingIntent.toString());
-//        for (Notification.Action action : actions) {
-//            if (action.getRemoteInputs() != null) {
-//                for (android.app.RemoteInput remoteInput : action.getRemoteInputs()) {
-//                    Log.i("KEYS",remoteInput.getResultKey());
-//                }
-//            }
-//        }
-//        if (replyPendingIntent != null) {
             try {
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putCharSequence(REPLY_KEY, reply);
 
                 RemoteInput.addResultsToIntent(sbn.getNotification().actions[0].getRemoteInputs(), intent, bundle);
-                Log.i("running replyer","success");
                 replyPendingIntent.send(context, 0, intent);
             } catch (PendingIntent.CanceledException e) {
                 throw new RuntimeException(e);
             }
-        }catch (java.lang.NullPointerException e){
+        } catch (java.lang.NullPointerException e) {
         }
     }
 
-    public void SMSReply(String reply){
+
+    public void SMSReply(String reply) {
         try {
             Bundle extras = sbn.getNotification().extras;
             //get title key of notification bundel
@@ -80,14 +75,33 @@ public class MultiReplyer {
             String ContectName = title;
             String regexStr = "^[0-9]$";
             String PhoneNumber;
-            if (ContectName.matches(regexStr)){
+            if (ContectName.matches(regexStr)) {
                 PhoneNumber = ContectName;
-            }else {
+            } else {
                 PhoneNumber = new ContectGrapper(context).getContactNumber(ContectName);
             }
 
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(PhoneNumber,null,reply,null,null);
-        }catch (Exception e){}
+            smsManager.sendTextMessage(PhoneNumber, null, reply, null, null);
+        } catch (Exception e) {
+        }
+    }
+
+    public String keyGraper(StatusBarNotification sbn) {
+        Bundle extras = sbn.getNotification().extras;
+        Notification.Action[] actions = sbn.getNotification().actions;
+        PendingIntent replyPendingIntent = sbn.getNotification().actions[0].actionIntent;
+        Log.i("is_error", Boolean.toString(sbn.getNotification().actions[0].actionIntent == null));
+
+        Log.i("pandintent", replyPendingIntent.toString());
+        for (Notification.Action action : actions) {
+            if (action.getRemoteInputs() != null) {
+                for (android.app.RemoteInput remoteInput : action.getRemoteInputs()) {
+//                    Log.i("KEYS",remoteInput.getResultKey());
+                    return remoteInput.getResultKey();
+                }
+            }
+        }
+        return "none";
     }
 }
