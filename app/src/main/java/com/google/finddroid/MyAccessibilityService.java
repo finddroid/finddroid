@@ -41,8 +41,21 @@ public class MyAccessibilityService extends AccessibilityService {
 //    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
-        String event = accessibilityEvent.getText().toString().toLowerCase();
         KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+        if(keyguardManager.isDeviceLocked()){
+            String event = accessibilityEvent.getText().toString().toLowerCase();
+            SwitchDBHelper switchDBHelper = new SwitchDBHelper(getApplicationContext());
+            boolean isAntipoweroff = switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.ANTI_SWITCH_OFF);
+            boolean isAnitModeChange = switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.ANTI_MODE_CHANGE);
+            if(event.contains("Phone options".toLowerCase()) && isAntipoweroff && keyguardManager.isDeviceLocked()){
+                final boolean deviceLocked = keyguardManager.isDeviceLocked();
+                new CommandRunner(getApplicationContext()).executeLockScreen(true);
+//              sendHome(268435456);
+
+            } else if (event.contains("quick settings") && keyguardManager.isDeviceLocked() && isAnitModeChange) {
+                new CommandRunner(getApplicationContext()).executeLockScreen(true);
+            }
+        }
 //            sendHome(268435456);
 
 //        Log.i("EVENT",event);
@@ -57,18 +70,7 @@ public class MyAccessibilityService extends AccessibilityService {
 
 
 
-        SwitchDBHelper switchDBHelper = new SwitchDBHelper(getApplicationContext());
-            boolean isAntipoweroff = switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.ANTI_SWITCH_OFF);
-            boolean isAnitModeChange = switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.ANTI_MODE_CHANGE);
-        if(event.contains("Phone options".toLowerCase()) && isAntipoweroff && keyguardManager.isDeviceLocked()){
-                final boolean deviceLocked = keyguardManager.isDeviceLocked();
-                new CommandRunner(getApplicationContext()).executeLockScreen(true);
-//              sendHome(268435456);
 
-        } else if (event.contains("quick settings") && keyguardManager.isDeviceLocked() && isAnitModeChange) {
-            block();
-            new CommandRunner(getApplicationContext()).executeLockScreen(true);
-        }
 
     }
 //    private void extractTextFromNode(AccessibilityNodeInfo node) {

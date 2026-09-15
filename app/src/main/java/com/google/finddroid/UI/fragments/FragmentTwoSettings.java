@@ -79,7 +79,7 @@ public class FragmentTwoSettings extends Fragment{
         if(commanderDBHelper.isEmptyCommanderPassword()) {
 //            itemList.add(new RecyclerViewFragTwoAdapterObj("Set Password","set password to control"));
         }else {
-            itemList.add(new RecyclerViewFragTwoAdapterObj("Reset Password", "current is " + currentPassword));
+            itemList.add(new RecyclerViewFragTwoAdapterObj("current password",currentPassword));
             isRestShow = true;
         }
         itemList.add(new RecyclerViewFragTwoAdapterObj(CommandsGlobalVar.START_FINDDROID_COMMAND +currentPassword,CommandsGlobalVar.Description.START_FINDDROID_COMMAND_DESCRIPTION));

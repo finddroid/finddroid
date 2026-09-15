@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="#144BB2F9"
+    android:background="#01040B"
     >
 <!--    <com.google.android.material.appbar.MaterialToolbar-->
 <!--        android:layout_width="match_parent"-->
@@ -18,28 +18,204 @@ back groud #202121
 />-->
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/main_tab_layout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/prm"
-        app:tabInlineLabel="true"
-        app:tabTextColor="@color/White"
-        app:tabIndicatorColor="#9EC1F8"
-        app:tabSelectedTextColor="@color/Wheat"
-        app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
-        android:elevation="22dp"
-        app:tabGravity="fill"
+        android:layout_height="match_parent"
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/main_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:tabInlineLabel="true"
+                app:tabTextColor="@color/White"
+                app:tabIndicatorColor="#9EC1F8"
+                app:tabSelectedTextColor="@color/Wheat"
+                app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
+                android:elevation="22dp"
+                app:tabGravity="fill"
+                >
 
-    </com.google.android.material.tabs.TabLayout>
+            </com.google.android.material.tabs.TabLayout>
 
+        </LinearLayout>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="view-pager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="57dp"
+        />
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:animateLayoutChanges="true"
+        android:visibility="gone"
+        android:id="@+id/MenuLayout"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:animateLayoutChanges="true"
+            android:id="@+id/menw_child"
+            android:background="@drawable/menu_desin"
+            android:visibility="gone"
+            android:elevation="100dp"
+
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="90dp"
+                android:id="@+id/reset_pass_menu"
+                android:backgroundTint="@color/mainthemecolor"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="5dp"
+                app:cardElevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:text="Reset Passward"
+                        android:visibility="visible"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="90dp"
+                android:backgroundTint="@color/mainthemecolor"
+                android:id="@+id/github_menu"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardElevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:text="GITHUB"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="90dp"
+                android:backgroundTint="@color/mainthemecolor"
+                android:id="@+id/wesite_menu"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardElevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:text="Website"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="90dp"
+                android:backgroundTint="@color/mainthemecolor"
+                android:id="@+id/delete_app_menu"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardElevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:text="Uninstall App"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="90dp"
+                android:backgroundTint="@color/mainthemecolor"
+                android:id="@+id/about_menu"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardElevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:text="About"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

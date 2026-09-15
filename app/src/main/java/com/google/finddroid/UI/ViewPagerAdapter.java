@@ -48,7 +48,7 @@ public class ViewPagerAdapter extends  FragmentPagerAdapter{
         if (position==0){
             return "Setup";
         }else if(position==1) {
-            return "Password & Commands";
+            return "Commands";
         }else{
             return null;
         }

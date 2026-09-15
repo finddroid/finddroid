@@ -1,5 +1,7 @@
 package com.google.finddroid;
 
+import static android.view.View.VISIBLE;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -7,19 +9,32 @@ import android.app.Dialog;
 
 import com.android.volley.Response;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -38,6 +53,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+import com.google.finddroid.DBs.CommanderDBHelper;
 import com.google.finddroid.UI.ViewPagerAdapter;
 
 import org.json.JSONException;
@@ -48,8 +64,15 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     int BACKGROUND_LOCATION_PERMISSION_CODE = 1000;
     int LOCATION_PERMISSION_CODE = 2000;
-    CardView gitcv;
-    CardView webcv;
+    CardView menuicon;
+    LinearLayout lc;
+    RelativeLayout ll;
+    ViewPager vp;
+    TabLayout tl;
+    ImageView menuIconImg;
+
+    CardView rstPass,github,website,deleteapk,aboutpage;
+
     //main permission define to access static function from other classes
     public static Activity main;
     @SuppressLint("MissingInflatedId")
@@ -82,17 +105,24 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
 
         /** SETUP VIEWPAGER **/
-        ViewPager vp = findViewById(R.id.main_viewpager);
-        TabLayout tl = findViewById(R.id.main_tab_layout);
+        vp = findViewById(R.id.main_viewpager);
+        tl = findViewById(R.id.main_tab_layout);
         /** FragmentSetAdapter is viewpager **/
         ViewPagerAdapter fsa = new ViewPagerAdapter(getSupportFragmentManager());
         vp.setAdapter(fsa);
         tl.setupWithViewPager(vp);
 
-        gitcv = findViewById(R.id.githubimg);
-        webcv = findViewById(R.id.websiteimg);
-        gitAndWebImgClickListener();
+        menuicon = findViewById(R.id.menuicon);
+        menuiconClickListener();
 
+        ll = findViewById(R.id.MenuLayout);
+        lc=findViewById(R.id.menw_child);
+        menuIconImg = findViewById(R.id.menuicon_img);
+        rstPass = findViewById(R.id.reset_pass_menu);
+        github = findViewById(R.id.github_menu);
+        website = findViewById(R.id.wesite_menu);
+        deleteapk = findViewById(R.id.delete_app_menu);
+        aboutpage = findViewById(R.id.about_menu);
 
 //        CheckForUpdate();
     }
@@ -226,21 +256,155 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void gitAndWebImgClickListener(){
-        gitcv.setOnClickListener(new View.OnClickListener() {
+    public void menuiconClickListener(){
+
+        menuicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/huihola/finddroid.git"));
-                startActivity(myIntent);
+//                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/huihola/finddroid.git"));
+//                startActivity(myIntent);
+                if (ll.getVisibility()== View.GONE) {
+                    TranslateAnimation animate = new TranslateAnimation(0, 0, -ll.getHeight(), 1);
+                    // duration of animation
+                    animate.setDuration(400);
+//                    animate.setFillAfter(true);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            lc.startAnimation(animate);
+                            lc.setVisibility(VISIBLE);
+//                            tl.setVisibility(View.GONE);
+                            menuIconImg.setImageResource(R.drawable.menu_close_icon);
+                            menuItemClick();
+
+                        }
+                    },150);
+                    ll.setVisibility(VISIBLE);
+
+                }
+                else{
+                    TranslateAnimation animate = new TranslateAnimation(0, 0, 0, -1200);
+                    // duration of animation
+                    animate.setDuration(400);
+                    animate.setFillAfter(true);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+
+                            ll.setVisibility(View.GONE);
+                            lc.setVisibility(View.GONE);
+//                            tl.setVisibility(VISIBLE);
+                            menuIconImg.setImageResource(R.drawable.menu_icon1);
+                        }
+                    },400);
+                    lc.startAnimation(animate);
+                }
             }
         });
-        webcv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://finddroid.github.io/update.html"));
-                startActivity(myIntent);
-            }
-        });
+
+
+
     }
 
+    // Menu Iitem Click Listeners
+
+    public void menuItemClick(){
+        //menu all buttons listeners
+
+        rstPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAndGetPassword();
+            }
+        });
+        github.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/huihola"));
+                    startActivity(myIntent);
+                } catch (ActivityNotFoundException e) {
+
+                }
+            }
+        });
+
+        website.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://finddroid.github.io"));
+                    startActivity(myIntent);
+                } catch (ActivityNotFoundException e) {
+
+                }
+            }
+        });
+        deleteapk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                );
+
+                intent.setData(Uri.parse("package:" + getPackageName()));
+
+                startActivity(intent);
+            }
+        });
+        aboutpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,AboutActivity.class);
+                startActivity(i);
+            }
+        });
+
+    }
+
+    public void showAndGetPassword(){
+        Dialog dialog = new Dialog(this);
+//        dialog.setContentView(R.layout.custom_alert_box);
+        View v = LayoutInflater.from(this).inflate(R.layout.custom_alert_box,null,false);
+        dialog.setContentView(v);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = 900;
+
+        Button set_btn = dialog.findViewById(R.id.custom_alert_box_set_btn);
+        Button cancel_btn= dialog.findViewById(R.id.custom_alert_box_cancel_btn);
+        EditText passward = dialog.findViewById(R.id.custom_alert_box_password);
+        set_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String passwordString = passward.getText().toString();
+//                Log.i("passwoard",passwordString.toString());
+                if (passwordString != null){
+                    CommanderDBHelper commanderDBHelper = new CommanderDBHelper(getApplicationContext());
+                    commanderDBHelper.DeleteDataFromCommanderPassword();
+                    commanderDBHelper.InsertDataToCommanderPassword(passwordString);
+                    commanderDBHelper.close();
+                    MainActivity.main.finish();
+                    startActivity(MainActivity.main.getIntent());
+                }
+            }
+        });
+
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
 }

@@ -40,7 +40,7 @@ public class CommandReceiver{
     public void CheckAndAccess(){
         CommanderDBHelper commanderDBHelper = new CommanderDBHelper(context);
         // set string for command explain
-        String USER_COMMANDS = "FindMyDroid : \n\n"+
+        String USER_COMMANDS = "FindDroid : \n\n"+
                 "* "+CommandsGlobalVar.FLESH_CONTROL_COMMAND + "on/" + "off \n" +
                 "* "+CommandsGlobalVar.LOCATION_COMMAND+"\n"+
                 "* "+CommandsGlobalVar.RING_MODE_COMMAND +CommandsGlobalVar.SILENT_RING + "/" + CommandsGlobalVar.NORMAL_RING +"\n"+
@@ -71,11 +71,11 @@ public class CommandReceiver{
                     if(checkPassword){ //auth the password is same which given by owner.
                         setNumberToDB(this.PhoneNumber);
                         MultiReplyer multiReplyer = new MultiReplyer(statusBarNotification,context);
-                        multiReplyer.sendReply("FindMyDroid Access Granted");
+                        multiReplyer.sendReply("FindDroid Access Granted");
                         multiReplyer.sendReply(USER_COMMANDS);
                     }else {// else not auth.
                         //send reply
-                        new MultiReplyer(statusBarNotification,context).sendReply("FindMyDroid Access denied");
+                        new MultiReplyer(statusBarNotification,context).sendReply("FindDroid Access denied");
                     }
                 }
             }

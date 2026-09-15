@@ -90,18 +90,18 @@ public class FragmentOneSettings extends Fragment implements CheckAndRequestLoca
 
         if (db.isEmpty()) {
             SwitchDBHelper switchDBHelper = new SwitchDBHelper(getContext());
-            switchDBHelper.InsertData(SwitchDBGlobalVar.NOTIFICATION_ACCESS,"Enable if your android upper version then Android 12", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.ACCESSIBILITY_ACCESS,"required for some functionality", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.ADMIN_ACCESS,"necessary for lock & Disable Notification panel and Power Menu on lock screen", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.SET_PASSWORD,"set password to Authenticate Commands", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.LOCATION_ACCESS,"required to get location",false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.LOCK_FROM_COMMAND,"required to lock device by command",false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.RING_MODE_ACCESS,"required to change ring mode",false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.NOTIFICATION_ACCESS,"Required for Command & Control", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.ACCESSIBILITY_ACCESS,"Required for Anti Switch Off Feature", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.ADMIN_ACCESS,"Required to Lock Screen from Command", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.SET_PASSWORD,"Set password to Authenticate Commands", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.LOCATION_ACCESS,"Required to get location",false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.LOCK_FROM_COMMAND,"Required to lock device by command",false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.RING_MODE_ACCESS,"Required to change ring mode",false);
             switchDBHelper.InsertData(SwitchDBGlobalVar.SMS_ACCESS,"Control Device from SMS",false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.WHATSAPP_ACCESS,"Control Device from Whatsapp message", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.TELEGRAM_ACCESS,"Control Device from Telegram message", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.ANTI_SWITCH_OFF,"Device can't be power off until unlock Enable if your Android Version Lower then Android 12", false);
-            switchDBHelper.InsertData(SwitchDBGlobalVar.ANTI_MODE_CHANGE,"Can't Change Mode (flight mode,internet) until unlock Enable if your Android Version Lower then Android 12",false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.WHATSAPP_ACCESS,"Control Device from Whatsapp Message", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.TELEGRAM_ACCESS,"Control Device from Telegram Message", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.ANTI_SWITCH_OFF,"Disable Switch Off menu while Device is Locked", false);
+            switchDBHelper.InsertData(SwitchDBGlobalVar.ANTI_MODE_CHANGE,"Disable Control Panel While Device is Locked",false);
         } else {
             try {
                 int accessEnabled = Settings.Secure.getInt(MainActivity.main.getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED);

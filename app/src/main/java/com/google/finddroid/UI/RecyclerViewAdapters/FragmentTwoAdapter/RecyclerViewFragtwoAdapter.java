@@ -60,9 +60,9 @@ public class RecyclerViewFragtwoAdapter extends RecyclerView.Adapter<RecyclerVie
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (getPosition() == 0 && title.getText().equals("Reset Password")){
-                        showAndGetPassword();
-                    }
+//                    if (getPosition() == 0 && title.getText().equals("Reset Password")){
+//                        showAndGetPassword();
+//                    }
                 }
             });
         }

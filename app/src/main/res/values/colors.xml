@@ -142,9 +142,12 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="black">#000000</color>
+    <color name="trnsprm">#DD171F24</color>
+    <color name="mainthemecolor">#01050A</color>
 
 
-        <!-- FindDroid dark UI -->
+
+    <!-- FindDroid dark UI -->
         <color name="fd_background">#0B0F0D</color>
         <color name="fd_surface">#121815</color>
         <color name="fd_surface_light">#18211C</color>

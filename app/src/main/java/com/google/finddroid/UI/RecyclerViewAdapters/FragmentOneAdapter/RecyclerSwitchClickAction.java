@@ -120,22 +120,15 @@ public class RecyclerSwitchClickAction {
             MainActivity.main.requestPermissions(permissions,3000);
         }
         else if(mPostion==8){//CONTROL WITH WHATSAPP PERMISSION
-            //Check for notification permission
-            ComponentName cn = new ComponentName(mContext, MyAccessibilityService.class);
-            String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_accessibility_services");
-            final boolean enabled = flat != null && flat.contains(cn.flattenToString());
             //If permission not granted it show the lottie anim and ask user to enable it
-            if(!enabled) {
+            if(!switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.NOTIFICATION_ACCESS)) {
                 ShowNotificationPermissionBox();
             }
         }
         else if (mPostion==9) {//CONTROL WITH TELEGRAM PERMISSION
             //Check for notification permission
-            ComponentName cn = new ComponentName(mContext, MyAccessibilityService.class);
-            String flat = Settings.Secure.getString(mContext.getContentResolver(), "enabled_accessibility_services");
-            final boolean enabled = flat != null && flat.contains(cn.flattenToString());
             //If permission not granted it show the lottie anim and ask user to enable it
-            if(!enabled) {
+            if(!switchDBHelper.CheckSwitchState(SwitchDBGlobalVar.NOTIFICATION_ACCESS)) {
                 ShowNotificationPermissionBox();
             }
         }

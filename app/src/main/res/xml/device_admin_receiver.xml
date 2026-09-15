@@ -3,5 +3,7 @@
     <uses-policies>
         <force-lock/>
         <reset-password />
+        <profile-owner />
+        <device-owner />
     </uses-policies>
 </device-admin>

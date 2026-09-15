@@ -6,52 +6,24 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 public class MyAdminReceiver extends DeviceAdminReceiver {
     @Override
     public void onEnabled(Context context, Intent intent) {
         super.onEnabled(context, intent);
+
 //        Log.i("PERmission","enabled");
-
-        //**** DISABLE NOTIFICATION PANNEL ON LOCKSCREEN ***
-        DevicePolicyManager dpm =
-                (DevicePolicyManager) context.getSystemService(
-                        Context.DEVICE_POLICY_SERVICE);
-
-        ComponentName admin =
-                new ComponentName(context, MyAdminReceiver.class);
-
-        if (dpm.isDeviceOwnerApp(context.getPackageName())) {
-
-            // Allow this app to enter Lock Task mode
-            dpm.setLockTaskPackages(
-                    admin,
-                    new String[]{context.getPackageName()}
-            );
-
-            // Disable Lock Task system UI features
+        DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName componentName = new ComponentName(context,MyAdminReceiver.class);
+        Log.d("ADMIN", "Device owner = " +
+                dpm.isDeviceOwnerApp(context.getPackageName()));
+        if(dpm.isDeviceOwnerApp(context.getPackageName())){
+            String[] packages = {context.getPackageName()};
+            dpm.setLockTaskPackages(componentName,packages);
+            int flags = DevicePolicyManager.LOCK_TASK_FEATURE_NONE;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                dpm.setLockTaskFeatures(
-                        admin,
-                        DevicePolicyManager.LOCK_TASK_FEATURE_NONE
-                );
-            }
-        }
-
-        //*** Disable power off manu while device is locked ***
-
-
-        if (dpm.isDeviceOwnerApp(context.getPackageName())) {
-            dpm.setLockTaskPackages(
-                    admin,
-                    new String[]{context.getPackageName()}
-            );
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                dpm.setLockTaskFeatures(
-                        admin,
-                        DevicePolicyManager.LOCK_TASK_FEATURE_NONE
-                );
+                dpm.setLockTaskFeatures(componentName,flags);
             }
         }
         }
