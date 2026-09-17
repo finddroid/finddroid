@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.google.finddroid"
+    namespace = "com.hola.finddroid"
     compileSdk = 34
 
     defaultConfig {
