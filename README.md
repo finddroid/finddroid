@@ -1,7 +1,7 @@
 # FindDroid
 
 <p align="center">
-  <img src="https://finddroid.github.io/images/findroid_dark_logo.png" alt="FindDroid Logo" width="120"/>
+  <img src="https://findroid.github.io/assets/logo.png" alt="FindDroid Logo" width="120"/>
 </p>
 
 <h3 align="center">Find your device. Even when it doesn't want to be found.</h3>
@@ -76,14 +76,9 @@ FindDroid is written in **Java** and built using the **Android SDK**.
 
 Get the latest FindDroid release from the official website:
 
-Download From website or FindDroid Installer apk
-
 <p align="center">
   <a href="https://finddroid.github.io/">
     <img src="https://img.shields.io/badge/Download-FindDroid-2ea44f?style=for-the-badge&logo=android&logoColor=white" alt="Download FindDroid"/>
-  </a>
-  <a href="https://github.com/finddroid/finddroidInstaller">
-    <img src="https://img.shields.io/badge/GITHUB-FindDroid Installer-2ea44f?style=for-the-badge&logo=android&logoColor=white" alt="Download FindDroid"/>
   </a>
 </p>
 
@@ -100,9 +95,10 @@ The website contains the latest available APK and additional information about F
 ## 🖼️ Screenshots
 
 <p align="center">
-  <img src="screenshots/home.png" width="220"/>
-  <img src="screenshots/location.png" width="220"/>
-  <img src="screenshots/settings.png" width="220"/>
+  <img src="screenshots/ss0.jpeg" width="220"/>
+  <img src="screenshots/ss1.jpeg" width="220"/>
+  <img src="screenshots/ss2.jpeg" width="220"/>
+  <img src="screenshots/ss3.jpeg"
 </p>
 
 <p align="center">
@@ -321,7 +317,7 @@ See the [`LICENSE`](LICENSE) file for the license and usage terms.
 Also known as **HuiHola**
 
 * GitHub: [@HuiHola](https://github.com/HuiHola)
-* Website: [findroid.github.io](https://finddroid.github.io/)
+* Website: [findroid.github.io](https://findroid.github.io/)
 
 ---
 
