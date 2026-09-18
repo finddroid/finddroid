@@ -12,10 +12,10 @@
 
 <p align="center">
   <a href="https://finddroid.github.io/">🌐 Website</a> •
-  <a href="#download">📥 Download</a> •
-  <a href="#features">✨ Features</a> •
-  <a href="#building-from-source">🛠️ Build</a> •
-  <a href="#contributing">🤝 Contributing</a>
+  <a href="https://finddroid.github.io/#download">📥 Download</a> •
+  <a href="https://finddroid.github.io/features.html">✨ Features</a> •
+  <a href="https://github.com/finddroid/finddroid">🛠️ Build</a> •
+  <a href="https://github.com/finddroid/finddroid">🤝 Contributing</a>
 </p>
 
 ---
