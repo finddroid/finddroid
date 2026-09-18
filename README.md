@@ -98,7 +98,7 @@ The website contains the latest available APK and additional information about F
   <img src="screenshots/ss0.jpeg" width="220"/>
   <img src="screenshots/ss1.jpeg" width="220"/>
   <img src="screenshots/ss2.jpeg" width="220"/>
-  <img src="screenshots/ss3.jpeg"
+  <img src="screenshots/ss3.jpeg" width=220"/>
 </p>
 
 <p align="center">
