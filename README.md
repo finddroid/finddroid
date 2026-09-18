@@ -1,7 +1,7 @@
 # FindDroid
 
 <p align="center">
-  <img src="https://findroid.github.io/assets/logo.png" alt="FindDroid Logo" width="120"/>
+  <img src="https://finddroid.github.io/images/findroid_dark_logo.png" alt="FindDroid Logo" width="120"/>
 </p>
 
 <h3 align="center">Find your device. Even when it doesn't want to be found.</h3>
@@ -98,7 +98,7 @@ The website contains the latest available APK and additional information about F
   <img src="screenshots/ss0.jpeg" width="220"/>
   <img src="screenshots/ss1.jpeg" width="220"/>
   <img src="screenshots/ss2.jpeg" width="220"/>
-  <img src="screenshots/ss3.jpeg" width=220"/>
+  <img src="screenshots/ss3.jpeg" width="220"/>
 </p>
 
 <p align="center">
@@ -310,14 +310,14 @@ See the [`LICENSE`](LICENSE) file for the license and usage terms.
 
 ---
 
-## 👨💻 Author
+## 👨‍💻 Author
 
 **Dhruv Namdev**
 
 Also known as **HuiHola**
 
 * GitHub: [@HuiHola](https://github.com/HuiHola)
-* Website: [findroid.github.io](https://findroid.github.io/)
+* Website: [finddroid.github.io](https://finddroid.github.io/)
 
 ---
 
@@ -354,4 +354,3 @@ The availability of certain features depends on Android version, device manufact
 <p align="center">
   <a href="https://finddroid.github.io/">🌐 finddroid.github.io</a>
 </p>
-
