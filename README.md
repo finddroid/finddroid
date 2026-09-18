@@ -352,6 +352,6 @@ The availability of certain features depends on Android version, device manufact
 </p>
 
 <p align="center">
-  <a href="https://finddroid.github.io/">🌐 findroid.github.io</a>
+  <a href="https://finddroid.github.io/">🌐 finddroid.github.io</a>
 </p>
 
